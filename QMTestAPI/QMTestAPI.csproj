@@ -13,4 +13,8 @@
     <PackageReference Include="coverlet.collector" Version="1.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\QuantityMesurement_API\QuantityMesurement_API.csproj" />
+  </ItemGroup>
+
 </Project>

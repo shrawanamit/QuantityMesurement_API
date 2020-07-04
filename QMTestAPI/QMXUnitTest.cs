@@ -1,9 +1,14 @@
-using System;
-using Xunit;
+//-----------------------------------------------------------------------
+// <copyright file="QMXUnitTest.cs" company="BridgeLabz Solution">
+//  Copyright (c) BridgeLabz Solution. All rights reserved.
+// </copyright>
+// <author>Amit kumar</author>
+//-----------------------------------------------------------------------
 
 namespace QMTestAPI
 {
-    public class UnitTest1
+    using Xunit;
+    public class QMXUnitTest
     {
         [Fact]
         public void Test1()
