@@ -4,9 +4,84 @@
 // </copyright>
 // <author>Amit kumar</author>
 //-----------------------------------------------------------------------
+using QMCommanLayer;
+using QMCommanLayer.Models;
+using QMRepositoryLayer.Interface;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace QMRepositoryLayer.Service
 {
-    class QuantityMesurementRL
+    public class QuantityMesurementRL: IQuantityMesurementRL
     {
+
+        readonly QuantityMesurementContext _QuantityMesurementContext;
+
+        public QuantityMesurementRL(QuantityMesurementContext quantityMesurementContext)
+        {
+            _QuantityMesurementContext = quantityMesurementContext;
+        }
+
+        /// <summary>
+        /// Method to Add Conversion Detail to Database.
+        /// </summary>
+        /// <param name="quantity"></param>
+        /// <returns>Conversion result</returns>
+        public QuantityMesurement AddQuantity(QuantityMesurement quantity)
+        {
+            try
+            {
+                //add Data in database
+                _QuantityMesurementContext.QuantityMesurementTable.Add(quantity);
+                //saves all changes in database
+                _QuantityMesurementContext.SaveChanges();
+                return quantity;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        /// <summary>
+        /// Method to Add Conversion Detail to Database.
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns>Conversion result</returns>
+        public IEnumerable<QuantityMesurement> DeleteQuntity(int Id)
+        {
+            try
+            {
+                List<QuantityMesurement> quantity = _QuantityMesurementContext.QuantityMesurementTable.Take(3).ToList();
+                //Quantity quantity = dBContext.Quantities.Find(Id);
+                if (quantity != null)
+                {
+                    //Remove Data in database
+                    _QuantityMesurementContext.QuantityMesurementTable.RemoveRange(quantity);
+                    //saves all changes in database
+                    _QuantityMesurementContext.SaveChanges();
+                }
+                return quantity;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Method To Get All Convserion Details.
+        /// </summary>
+        public IEnumerable<QuantityMesurement> GetAllQuantity()
+        {
+            try
+            {
+                return _QuantityMesurementContext.QuantityMesurementTable;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
