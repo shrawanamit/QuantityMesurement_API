@@ -22,13 +22,6 @@ namespace QMBusinessLayer.Interface
         QuantityMesurement ConvertQuantity(QuantityMesurement quantity);
 
         /// <summary>
-        /// Method to  Calculate Conversion.
-        /// </summary>
-        /// <param name="quantity"></param>
-        /// <returns> result of Conversion</returns>
-        //double CalculateConvesionValue(QuantityMesurement quantity);
-
-        /// <summary>
         ///  API for Delete data
         /// </summary>
         /// <param name="Id">Delete data</param>

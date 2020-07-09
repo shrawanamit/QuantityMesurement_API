@@ -52,12 +52,12 @@ namespace QMRepositoryLayer.Service
         {
             try
             {
-                List<QuantityMesurement> quantity = _QuantityMesurementContext.QuantityMesurementTable.Take(3).ToList();
-                //Quantity quantity = dBContext.Quantities.Find(Id);
-                if (quantity != null)
+                List<QuantityMesurement> quantity = _QuantityMesurementContext.QuantityMesurementTable.ToList();
+                var itemToRemove = quantity.SingleOrDefault(x => x.Id==Id);
+                if (itemToRemove != null)
                 {
                     //Remove Data in database
-                    _QuantityMesurementContext.QuantityMesurementTable.RemoveRange(quantity);
+                    _QuantityMesurementContext.QuantityMesurementTable.Remove(itemToRemove);
                     //saves all changes in database
                     _QuantityMesurementContext.SaveChanges();
                 }

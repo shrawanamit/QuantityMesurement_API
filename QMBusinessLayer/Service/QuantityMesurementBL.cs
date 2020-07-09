@@ -28,7 +28,7 @@ namespace QMBusinessLayer.Service
             try
             {
                 quantity.Result = CalculateConvesionValue(quantity);
-                if (quantity.Result > 0)
+                if (quantity.Result >= 0)
                 {
                     return quantityMesurementRL.AddQuantity(quantity);
                 }
@@ -92,76 +92,94 @@ namespace QMBusinessLayer.Service
                 const double WEIGHT_CONSTANT = 1000;
                 const double GALLON_TO_LITRE_CONSTANT = 3.78;
                 const double VOLUME_CONSTANT = 1000;
+                string InchToFeet = "InchToFeet";
+                string FeetToInch = "FeetToInch";
+                string InchToYard = "InchToYard";
+                string YardToInch = "YardToInch";
+                string YardToFeet = "YardToFeet";
+                string FeetToYard = "FeetToYard";
+                string CentimeterToInch = "CentimeterToInch";
+                string InchToCentimeter = "InchToCentimeter";
+                string KilogramsToGrams = "KilogramsToGrams";
+                string GramsToKilograms = "GramsToKilograms";
+                string KilogramsToTonnes = "KilogramsToTonnes";
+                string TonnesToKilograms = "TonnesToKilograms";
+                string GallonToLitter = "GallonToLitter";
+                string LitterToGallon = "LitterToGallon";
+                string MililiterToLiter = "MililiterToLiter";
+                string LiterToMililiter = "LiterToMililiter";
+                string FahrenheitToCelsius = "FahrenheitToCelsius";
+                string CelsiusToFahrenheit = "CelsiusToFahrenheit";
 
-                if (operation.Equals(Enum.Unit.INCH_TO_FEET))
+                if (operation.Equals(InchToFeet))
                 {
                     result = value / INCH_FEET_CONSTANT;
                 }
-                else if (operation.Equals(Enum.Unit.FEET_TO_INCH))
+                else if (operation.Equals(FeetToInch))
                 {
                     result = value * INCH_FEET_CONSTANT;
                 }
-                else if (operation.Equals(Enum.Unit.INCH_TO_YARD))
+                else if (operation.Equals(InchToYard))
                 { 
                     result = value / INCH_YARD_CONSTANT;
                 }
-                else if (operation.Equals(Enum.Unit.YARD_TO_INCH))
+                else if (operation.Equals(YardToInch))
                 {
                     result = value * INCH_YARD_CONSTANT;
                 }
-                else if (operation.Equals(Enum.Unit.YARD_TO_FEET))
+                else if (operation.Equals(YardToFeet))
                 {
                     result = value * FEET_YARD_CONSTANT;
                 }
-                else if (operation.Equals(Enum.Unit.FEET_TO_YARD))
+                else if (operation.Equals(FeetToYard))
                 {
                     result = value / FEET_YARD_CONSTANT;
                 }
-                else if (operation.Equals(Enum.Unit.CENTIMETER_TO_INCH))
+                else if (operation.Equals(CentimeterToInch))
                 {
                     result = value / CM_INCH_CONSTANT;
                 }
-                else if (operation.Equals(Enum.Unit.INCH_TO_CENTIMETER))
+                else if (operation.Equals(InchToCentimeter))
                 {
                     result = value * CM_INCH_CONSTANT;
                 }
-                else if (operation.Equals(Enum.Unit.GRAMS_TO_KILOGRAMS))
+                else if (operation.Equals(GramsToKilograms))
                 {
                     result = value / WEIGHT_CONSTANT;
                 }
-                else if (operation.Equals(Enum.Unit.KILOGRAMS_TO_GRAMS))
+                else if (operation.Equals(KilogramsToGrams))
                 {
                     result = value * WEIGHT_CONSTANT;
                 }
-                else if (operation.Equals(Enum.Unit.TONNE_TO_KILOGRAMS))
+                else if (operation.Equals(TonnesToKilograms))
                 {
                     result = value * WEIGHT_CONSTANT;
                 }
-                else if (operation.Equals(Enum.Unit.KILOGRAMS_TO_TONNE))
+                else if (operation.Equals(KilogramsToTonnes))
                 {
                     result = value / WEIGHT_CONSTANT;
                 }
-                else if (operation.Equals(Enum.Unit.GALLON_TO_LITER))
+                else if (operation.Equals(GallonToLitter))
                 {
                     result = value * GALLON_TO_LITRE_CONSTANT;
                 }
-                else if (operation.Equals(Enum.Unit.LITER_TO_GALLON))
+                else if (operation.Equals(LitterToGallon))
                 {
                     result = value / GALLON_TO_LITRE_CONSTANT;
                 }
-                else if (operation.Equals(Enum.Unit.MILILITER_TO_LITER))
+                else if (operation.Equals(MililiterToLiter))
                 {
                     result = value / VOLUME_CONSTANT;
                 }
-                else if (operation.Equals(Enum.Unit.LITER_TO_MILILITER))
+                else if (operation.Equals(LiterToMililiter))
                 {
                     result = value * VOLUME_CONSTANT;
                 }
-                else if (operation.Equals(Enum.Unit.FAHRENHEIT_TO_CELSIUS))
+                else if (operation.Equals(FahrenheitToCelsius))
                 {
                     result = (value - 32) * 5 / 9;
                 }
-                else if (operation.Equals(Enum.Unit.FAHRENHEIT_TO_CELSIUS))
+                else if (operation.Equals(CelsiusToFahrenheit))
                 {
                     result = (value * 9 / 5) + 32;
                 }
