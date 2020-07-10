@@ -143,32 +143,32 @@ namespace QuantityMesurement_API.Controllers
         /// </summary>
         /// <param name="Id">Delete data</param>
         /// <returns>delete data by ID</returns>
-        //[HttpDelete("{QuantityId}")]
-        //[Route("compare")]
-        //public IActionResult DeleteCompare(int QuantityId)
-        //{
-        //    try
-        //    {
-        //        var result = _dataBL.DeleteQuntityCompare(QuantityId);
-        //        //if result is not equal to zero then details Deleted sucessfully
-        //        if (!result.Equals(null))
-        //        {
-        //            var Success = "True";
-        //            var Message = "Data deleted Sucessfully of Data equal to Id";
-        //            return this.Ok(new { Success, Message, DataId = QuantityId });
-        //        }
-        //        else                                           //Data is not deleted 
-        //        {
-        //            var Success = "False";
-        //            var Message = "Data is not deleted Sucessfully";
-        //            return this.BadRequest(new { Success, Message, Data = QuantityId });
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return this.BadRequest(new { Success = false, Message = e.Message });
-        //    }
-        //}
+        [HttpDelete]
+        [Route("compare/{Id}")]
+        public IActionResult DeleteCompare(int Id)
+        {
+            try
+            {
+                var result = _dataBL.DeleteQuntityCompare(Id);
+                //if result is not equal to zero then details Deleted sucessfully
+                if (!result.Equals(null))
+                {
+                    var Success = "True";
+                    var Message = "Data deleted Sucessfully of Data equal to Id";
+                    return this.Ok(new { Success, Message, DataId = Id });
+                }
+                else                                           //Data is not deleted 
+                {
+                    var Success = "False";
+                    var Message = "Data is not deleted Sucessfully";
+                    return this.BadRequest(new { Success, Message, Data = Id });
+                }
+            }
+            catch (Exception e)
+            {
+                return this.BadRequest(new { Success = false, Message = e.Message });
+            }
+        }
 
         /// <summary>
         ///  API for get all emplyee details
