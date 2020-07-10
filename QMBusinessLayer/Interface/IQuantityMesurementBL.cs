@@ -6,6 +6,7 @@
 //-----------------------------------------------------------------------
 
 using QMCommanLayer;
+using QMCommanLayer.Models;
 using System;
 using System.Collections.Generic;
 using static QMBusinessLayer.Service.Enum;
@@ -32,5 +33,14 @@ namespace QMBusinessLayer.Interface
         ///  API for get all emplyee details
         /// </summary>
         IEnumerable<QuantityMesurement> GetAllQuantity();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="compare"></param>
+        /// <returns></returns>
+        QuantityMesurementCompare AddComparison(QuantityMesurementCompare compare);
+        IEnumerable<QuantityMesurementCompare> DeleteQuntityCompare(int Id);
+        IEnumerable<QuantityMesurementCompare> GetAllQuantityCompare();
     }
 }

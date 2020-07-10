@@ -4,6 +4,7 @@
 // </copyright>
 // <author>Amit kumar</author>
 //-----------------------------------------------------------------------
+
 using QMCommanLayer;
 using QMCommanLayer.Models;
 using QMRepositoryLayer.Interface;
@@ -77,6 +78,62 @@ namespace QMRepositoryLayer.Service
             try
             {
                 return _QuantityMesurementContext.QuantityMesurementTable;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public QuantityMesurementCompare AddComparison(QuantityMesurementCompare compare)
+        {
+            try
+            {
+                //send the data to database and add
+                _QuantityMesurementContext.QuantityMesurementCompareTable.Add(compare);
+                //saves all changes in database
+                _QuantityMesurementContext.SaveChanges();
+                return compare;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Method to Add Conversion Detail to Database.
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns>Conversion result</returns>
+        public IEnumerable<QuantityMesurementCompare> DeleteQuntityCompare(int Id)
+        {
+            try
+            {
+                List<QuantityMesurementCompare> quantity = _QuantityMesurementContext.QuantityMesurementCompareTable.ToList();
+                var itemToRemove = quantity.SingleOrDefault(x => x.Id == Id);
+                if (itemToRemove != null)
+                {
+                    //Remove Data in database
+                    _QuantityMesurementContext.QuantityMesurementCompareTable.Remove(itemToRemove);
+                    //saves all changes in database
+                    _QuantityMesurementContext.SaveChanges();
+                }
+                return quantity;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Method To Get All Convserion Details.
+        /// </summary>
+        public IEnumerable<QuantityMesurementCompare> GetAllQuantityCompare()
+        {
+            try
+            {
+                return _QuantityMesurementContext.QuantityMesurementCompareTable;
             }
             catch (Exception e)
             {

@@ -12,8 +12,7 @@ namespace QuantityMesurement_API.Controllers
     using Microsoft.AspNetCore.Mvc;
     using QMBusinessLayer.Interface;
     using QMCommanLayer;
-    using QMRepositoryLayer.Interface;
-    using static QMBusinessLayer.Service.Enum;
+    using QMCommanLayer.Models;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -101,7 +100,96 @@ namespace QuantityMesurement_API.Controllers
                 else                                           //Data is not found
                 {
                     var Success = "False";
-                    var Message = "Conversion Data is not found";
+                    var Message = "Data is not found";
+                    return this.BadRequest(new { Success, Message, Data = result });
+                }
+
+            }
+            catch (Exception e)
+            {
+                return this.BadRequest(new { Success = false, Message = e.Message });
+            }
+        }
+
+        [HttpPost]
+        [Route("compare")]
+        public IActionResult AddComparison([FromBody] QuantityMesurementCompare compare)
+        {
+            try
+            {
+                var result = _dataBL.AddComparison(compare);
+                //if entry is not equal to null
+                if (!result.Equals(null))
+                {
+                    var Success = "True";
+                    var Message = "New Entry Added Sucessfully";
+                    return this.Ok(new { Success, Message, data = result });
+                }
+                else                                              //Entry is not added
+                {
+                    var Success = "False";
+                    var Message = "New Entry is not Added";
+                    return this.BadRequest(new { Success, Message, data = compare });
+                }
+            }
+            catch (Exception e)
+            {
+                return this.BadRequest(new { Success = false, Message = e.Message });
+            }
+        }
+
+        /// <summary>
+        ///  API for Delete data
+        /// </summary>
+        /// <param name="Id">Delete data</param>
+        /// <returns>delete data by ID</returns>
+        //[HttpDelete("{QuantityId}")]
+        //[Route("compare")]
+        //public IActionResult DeleteCompare(int QuantityId)
+        //{
+        //    try
+        //    {
+        //        var result = _dataBL.DeleteQuntityCompare(QuantityId);
+        //        //if result is not equal to zero then details Deleted sucessfully
+        //        if (!result.Equals(null))
+        //        {
+        //            var Success = "True";
+        //            var Message = "Data deleted Sucessfully of Data equal to Id";
+        //            return this.Ok(new { Success, Message, DataId = QuantityId });
+        //        }
+        //        else                                           //Data is not deleted 
+        //        {
+        //            var Success = "False";
+        //            var Message = "Data is not deleted Sucessfully";
+        //            return this.BadRequest(new { Success, Message, Data = QuantityId });
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return this.BadRequest(new { Success = false, Message = e.Message });
+        //    }
+        //}
+
+        /// <summary>
+        ///  API for get all emplyee details
+        /// </summary>
+        [HttpGet]
+        [Route("compare")]
+        public ActionResult<IEnumerable<QuantityMesurementCompare>> GetAllQuantityCompare()
+        {
+            try
+            {
+                var result = _dataBL.GetAllQuantityCompare();
+                if (!result.Equals(null))
+                {
+                    var Success = "True";
+                    var Message = "All Compare Data";
+                    return this.Ok(new { Success, Message, Data = result });
+                }
+                else                                           //Data is not found
+                {
+                    var Success = "False";
+                    var Message = "Data is not found";
                     return this.BadRequest(new { Success, Message, Data = result });
                 }
 

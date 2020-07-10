@@ -6,6 +6,7 @@
 //-----------------------------------------------------------------------
 
 using QMCommanLayer;
+using QMCommanLayer.Models;
 using System.Collections.Generic;
 
 namespace QMRepositoryLayer.Interface
@@ -30,6 +31,25 @@ namespace QMRepositoryLayer.Interface
         ///  get all quantity detail
         /// </summary>
         IEnumerable<QuantityMesurement> GetAllQuantity();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="compare"></param>
+        /// <returns></returns>
+        QuantityMesurementCompare AddComparison(QuantityMesurementCompare compare);
+
+        /// <summary>
+        ///  Delete data
+        /// </summary>
+        /// <param name="Id">Delete data</param>
+        /// <returns>delete data by ID</returns>
+        IEnumerable<QuantityMesurementCompare> DeleteQuntityCompare(int Id);
+
+        /// <summary>
+        ///  get all quantity detail
+        /// </summary>
+        IEnumerable<QuantityMesurementCompare> GetAllQuantityCompare();
 
     }
 }

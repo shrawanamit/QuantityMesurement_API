@@ -13,5 +13,7 @@ namespace QMCommanLayer.Models
         }
 
         public DbSet<QuantityMesurement> QuantityMesurementTable { get; set; }
+        public DbSet<QuantityMesurementCompare> QuantityMesurementCompareTable { get; set; }
+
     }
 }

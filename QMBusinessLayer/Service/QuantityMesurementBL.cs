@@ -7,9 +7,11 @@
 
 using QMBusinessLayer.Interface;
 using QMCommanLayer;
+using QMCommanLayer.Models;
 using QMRepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
+using static QMBusinessLayer.Service.Enum;
 
 namespace QMBusinessLayer.Service
 {
@@ -184,6 +186,179 @@ namespace QMBusinessLayer.Service
                     result = (value * 9 / 5) + 32;
                 }
                 return Math.Round(result, 2);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="comparison"></param>
+        /// <returns></returns>
+        public QuantityMesurementCompare AddComparison(QuantityMesurementCompare compare)
+        {
+            try
+            {
+                compare.Result = CompareConversion(compare);
+                if (compare.Result != null)
+                {
+                    return quantityMesurementRL.AddComparison(compare);
+                }
+                return compare;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        private string CompareConversion(QuantityMesurementCompare comparison)
+        {
+            try
+            { 
+                double ValueOne = comparison.ValueOne;
+                string UnitOfValueOne = comparison.UnitOfValueOne;
+                double ValueTwo = comparison.ValueTwo;
+                string UnitOfValueTwo = comparison.UnitOfValueTwo;
+                string result = "";
+                double result1 = 0; 
+                double result2=0;
+                
+                if (comparison.UnitOfValueOne == Unit.Inch.ToString())
+                {
+                    result1 = ValueOne;
+                }
+                if(comparison.UnitOfValueTwo == Unit.Inch.ToString())
+                {
+                    result2 = ValueTwo;
+                }
+                if (comparison.UnitOfValueOne == Unit.Feet.ToString())
+                {
+                    result1 = ValueOne * 12;
+                }
+                if (comparison.UnitOfValueTwo == Unit.Feet.ToString())
+                {
+                    result2 = ValueTwo * 12;
+                }
+                if (comparison.UnitOfValueOne == Unit.Yard.ToString())
+                {
+                    result1 = ValueOne * 36;
+                }
+                if (comparison.UnitOfValueTwo == Unit.Yard.ToString())
+                {
+                    result2 = ValueTwo * 36;
+                }
+                if (comparison.UnitOfValueOne == Unit.Centimeter.ToString())
+                {
+                    result1 = ValueOne / 2.5;
+                }
+                if (comparison.UnitOfValueTwo == Unit.Centimeter.ToString())
+                {
+                    result2 = ValueTwo/2.5;
+                }
+                if (comparison.UnitOfValueOne == Unit.Kilogram.ToString())
+                {
+                    result1 = ValueOne;
+                }
+                if (comparison.UnitOfValueTwo == Unit.Kilogram.ToString())
+                {
+                    result2 = ValueTwo;
+                }
+                if (comparison.UnitOfValueOne == Unit.Gram.ToString())
+                {
+                    result1 = ValueOne / 1000;
+                }
+                if (comparison.UnitOfValueTwo == Unit.Gram.ToString())
+                {
+                    result2 = ValueTwo / 1000;
+                }
+                if (comparison.UnitOfValueOne == Unit.Tonne.ToString())
+                {
+                    result1 = ValueOne * 1000;
+                }
+                if (comparison.UnitOfValueTwo == Unit.Tonne.ToString())
+                {
+                    result2 = ValueTwo * 1000;
+                }
+                if (comparison.UnitOfValueOne == Unit.Liter.ToString())
+                {
+                    result1 = ValueOne;
+                }
+                if (comparison.UnitOfValueTwo == Unit.Liter.ToString())
+                {
+                    result2 = ValueTwo;
+                }
+                if (comparison.UnitOfValueOne == Unit.Gallon.ToString())
+                {
+                    result1 = ValueOne * 1000;
+                }
+                if (comparison.UnitOfValueTwo == Unit.Gallon.ToString())
+                {
+                    result2 = ValueTwo * 1000;
+                }
+                if (comparison.UnitOfValueOne == Unit.Mililiter.ToString())
+                {
+                    result1 = ValueOne / 1000;
+                }
+                if (comparison.UnitOfValueTwo == Unit.Mililiter.ToString())
+                {
+                    result2 = ValueTwo / 1000;
+                }
+                if (comparison.UnitOfValueOne == Unit.Celsius.ToString())
+                {
+                    result1 = ValueOne ;
+                }
+                if (comparison.UnitOfValueTwo == Unit.Celsius.ToString())
+                {
+                    result2 = ValueTwo ;
+                }
+                if (comparison.UnitOfValueOne == Unit.Fahrenheit.ToString())
+                {
+                    result1 = (ValueOne - 32) * 5 / 9;
+                }
+                if (comparison.UnitOfValueTwo == Unit.Fahrenheit.ToString())
+                {
+                    result2 = (ValueTwo - 32) * 5 / 9;
+                }
+                if (result1 == result2)
+                {
+                    result = "Equal";
+                }
+                else
+                {
+                    result = "Not Equal";
+                }
+                return result;
+            }
+            catch (Exception e)
+            {
+                 throw new Exception(e.Message);
+            }
+        }
+
+        public IEnumerable<QuantityMesurementCompare> DeleteQuntityCompare(int Id)
+        {
+            try
+            {
+                return quantityMesurementRL.DeleteQuntityCompare(Id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        /// <summary>
+        ///  API for get all details
+        /// </summary>
+        public IEnumerable<QuantityMesurementCompare> GetAllQuantityCompare()
+        {
+            try
+            {
+                return quantityMesurementRL.GetAllQuantityCompare();
             }
             catch (Exception e)
             {
